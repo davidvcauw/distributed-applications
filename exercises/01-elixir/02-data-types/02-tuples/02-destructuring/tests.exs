@@ -20,6 +20,8 @@ defmodule Tests do
   use ExUnit.Case, async: true
   import Shared
 
-
-
+  check that: Cards.same_suit?({ 2, :hearts }, { 2, :hearts }), is_equal_to: true
+  check that: Cards.same_suit?({ 2, :hearts }, { 3, :hearts }), is_equal_to: true
+  check that: Cards.same_suit?({ 2, :hearts }, { 2, :spades }), is_equal_to: false
+  check that: Cards.same_suit?({ 2, :hearts }, { 3, :spades }), is_equal_to: false
 end

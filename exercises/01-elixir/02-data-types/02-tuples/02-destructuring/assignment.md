@@ -103,7 +103,7 @@ so Elixir is quite right to point this out.
 
 In order to ignore a value, you need to do so explicitly:
 
-```
+```elixir
 # Elixir
 def caresOnlyAboutValue( { value, _ } ) do
     ...
