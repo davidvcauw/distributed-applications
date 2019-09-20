@@ -13,7 +13,7 @@ xs = [ 1, 2, 3, 4, 5 ]
 
 [ head | tail ] = xs
 # head == 1
-# tail == [2, 3, 4]
+# tail == [2, 3, 4, 5]
 
 [ first, second | rest ] = xs
 # first = 1
