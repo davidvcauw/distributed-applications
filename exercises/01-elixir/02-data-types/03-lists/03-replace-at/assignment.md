@@ -2,7 +2,7 @@
 
 ## Task
 
-Write a function `Exercise.replace_at(xs, i, x)` that replaces
+Write a function `Util.replace_at(xs, i, x)` that replaces
 the item at index `i` with `x` in the list `xs`.
 For example,
 
