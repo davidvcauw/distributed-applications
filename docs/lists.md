@@ -21,7 +21,7 @@ reuse parts of the original data structure.
 
 ## Splitting
 
-Let's start with a crazy idea: why not cut the tuple in two part?
+Let's start with a crazy idea: why not cut the tuple in two parts?
 For example, instead of storing our data as `{1, 2, 3, 4, 5, 6}`,
 we rearrange it as `{ {1, 2, 3}, {4, 5, 6} }`. Now, if
 we need to modify an element, we only need to
@@ -198,7 +198,7 @@ you can simply write
 [1, 2, 3, 4]
 ```
 
-Not that Elixir makes a distinction between both: they have different types.
+Note that Elixir makes a distinction between both: they have different types.
 All linked list related functionality in Elixir can only operate on the second version.
 
 ## Why All This Explanation?
@@ -217,5 +217,5 @@ Sheer sadism, I suppose. But also for reasons more relevant for you:
 
 ## Comparison of Arrays vs Lists
 
-Since grpahical representation greatly help in the understanding
+Since graphical representations greatly help in the understanding
 of linked lists, we made them as slides available to you from the course's website.
