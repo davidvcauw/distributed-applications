@@ -43,4 +43,4 @@ Note that when keys are atoms, there's an alternative syntax for map literals:
 %{ a: 1, b: 2, c: 3 }
 ```
 
-Do don't be confused by the fact that there are two different notations.
+Don't be confused by the fact that there are two different notations.
