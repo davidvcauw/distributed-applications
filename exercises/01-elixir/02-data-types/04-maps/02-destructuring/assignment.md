@@ -30,12 +30,12 @@ value = map[:x] || :oops   # value = :oops
 ## Task
 
 Write a function `Util.follow(map, start)` that works as follows:
-say `map = %{:a => :b, :b => :c, :c => :d}` amd `start = :a`:
+say `map = %{:a => :b, :b => :c, :c => :d}` and `start = :a`:
 
 * It looks up `:a` in `map`; this gives `:b`.
 * Next, it looks up `:b` in `map`; this gives `:c`.
 * Next, it looks up `:c` in `map`; this gives `:d`.
-* Next, it looks up `:c` in `map`; the chain ends here.
+* Next, it looks up `:d` in `map`; the chain ends here.
 
 The function should return the list of all encountered values: `[:a, :b, :c, :d]`.
 
@@ -43,11 +43,11 @@ Try to solve this three times:
 
 * Using constructs you are familiar with.
 * Using `Map.fetch` and `case`.
-* Using `Map.fetch` and [Elixir's `with` expression](https://www.openmymind.net/Elixirs-With-Statement/)
+* Using `Map.fetch` and [Elixir's `with` expression](https://www.openmymind.net/Elixirs-With-Statement/).
 
-You can write your solution in different files. Say you store your code in `student3.js`, you
+You can write your solution in different files. Say you store your code in `student3.exs`, you
 can run the tests using
 
 ```bash
-$ STUDENT=student3.js elixir tests.exs
+$ STUDENT=student3.exs elixir tests.exs
 ```
