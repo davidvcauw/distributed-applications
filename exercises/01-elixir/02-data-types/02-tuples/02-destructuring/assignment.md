@@ -1,6 +1,6 @@
 # Assignment
 
-Given a tuple, you'll probably want access its elements.
+Given a tuple, you'll probably want to access its elements.
 Tuples are much like arrays, which to a C#/Java/C++ programmer means
 writing the following code:
 
