@@ -55,7 +55,7 @@ interface Function<T, R>
 }
 ```
 
-`Function<Integer, Integer> func = Math::abs` declares a variable `func` and assign the existing method `Math::abs` to it.
+`Function<Integer, Integer> func = Math::abs` declares a variable `func` and assigns the existing method `Math::abs` to it.
 In reality, the compiler actually defines a new class that implements `Function<Integer, Integer>` and
 defines `apply` so that it calls `Math.abs` on its parameter.
 `func.apply(-2)` simply returns `2`, as it is defined as absolute value.
