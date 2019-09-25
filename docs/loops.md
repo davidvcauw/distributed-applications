@@ -269,7 +269,7 @@ function filter(xs, condition)
 ```
 
 Note that `condition` now takes a parameter: it is a function
-that receives a element of `xs` and returns `true` if it should be selected.
+that receives an element of `xs` and returns `true` if it should be selected.
 
 Let's try it out:
 
