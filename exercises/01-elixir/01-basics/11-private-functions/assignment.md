@@ -22,7 +22,7 @@ However, these helper functions are often not
 meant for others to use, meaning
 you'd like to keep them private.
 
-Elixir lets you define private functiosn as follows:
+Elixir lets you define private functions as follows:
 
 ```elixir
 # Elixir

@@ -2,7 +2,7 @@
 
 ## Task
 
-Write a function `Cards.higher?(card1, cars2, trump_suit)` that determines
+Write a function `Cards.higher?(card1, card2, trump_suit)` that determines
 whether `card1` has a higher value than `card2`, according to rules
 common to many card games involving trump cards.
 `card1` and `card2` are both tuples with structure `{value, suit}`.

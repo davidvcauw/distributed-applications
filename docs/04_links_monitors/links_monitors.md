@@ -23,8 +23,8 @@ iex> inspect self
 "#PID<0.136.0>"
 iex> Process.exit self, :kill
 ** (EXIT from #PID<0.136.0>) shell process exited with reason: killed
-		
-iex> inspect self            
+
+iex> inspect self
 "#PID<0.139.0>"
 ```
 
@@ -32,7 +32,7 @@ As you undoubtedly have already surmised, after killing your own process a new o
 
 ## Links
 
-The unofficial motto "Let it crash!" is there for a reason. In comparison with other programming languages where you have to program defensively, we don't want that overhead. Though one big question is... what to do when it crashes? How can we `monitor` this? When process A and B are working on the same task and are communicating, it can happen that B crashes. In this case A has to crash as well. This can be done with a `link`. 
+The unofficial motto "Let it crash!" is there for a reason. In comparison with other programming languages where you have to program defensively, we don't want that overhead. Though one big question is... what to do when it crashes? How can we `monitor` this? When process A and B are working on the same task and are communicating, it can happen that B crashes. In this case A has to crash as well. This can be done with a `link`.
 
 ### Links are bidirectional
 
@@ -41,21 +41,21 @@ defmodule PingPong do
     # Note: this is the most rudimentary spawn! Check this with "inspect &(spawn)/3"
     #     You normally never use this.
     def start(), do: spawn(__MODULE__, :loop, [])
-		
+
     def loop() do
         receive do
             {:ping, from} ->
 		        IO.puts("ping")
 		        Process.send_after(from, {:pong, self()}, 1_000)
-		
+
             {:pong, from} ->
 		        IO.puts("pong")
 		        Process.send_after(from, {:ping, self()}, 1_000)
-		
+
             {:link, to} ->
 		        Process.link(to)
         end
-		
+
         loop()
     end
 end
@@ -73,7 +73,7 @@ Process.alive?(p1)
 Process.alive?(p2)
 ```
 
-So what happened? We first started our ping-pong match, then we link the first process towards the second. Keep in mind, when we link A to B, this is always called from 1 process, thus we only provide 1 argument to `Process.link/1` . 
+So what happened? We first started our ping-pong match, then we link the first process towards the second. Keep in mind, when we link A to B, this is always called from 1 process, thus we only provide 1 argument to `Process.link/1` .
 
 Links are bidirectional, hence that "p1" crashes. This can be verified with `Process.alive?` .
 
@@ -95,11 +95,13 @@ Process.flag :trap_exit, true
 
 It returns the old value, so don't be surprised when you the value "false" . Now spawn a linked process with a raise, and you'll see when you call "flush" that the exit message is in your mailbox.
 
+{% raw %}
 ```elixir
 {:EXIT, #PID<0.119.0>,
 {%RuntimeError{message: "uh oh"},
 [{:erl_eval, :do_apply, 6, [file: 'erl_eval.erl', line: 678]}]}}
 ```
+{% endraw %}
 
 You can pattern match on this message, do something with it, restart the process, etc... Supervisors are based upon these messages and take corrective actions when they receive one.
 

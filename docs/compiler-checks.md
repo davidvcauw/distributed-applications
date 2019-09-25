@@ -138,7 +138,7 @@ above, `foo` has arity `1` while `foo()` calls the function `foo` with arity 0.
 In other words, `foo/1` exists, but not `foo/0`.
 
 The arity allows for a limited form of overloading:
-the same functionn name can be reused by multiple functions as long
+the same function name can be reused by multiple functions as long
 as they have a different arity.
 
 ```elixir
