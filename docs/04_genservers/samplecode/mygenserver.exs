@@ -37,7 +37,7 @@ defmodule TaskHandler do
   # CLIENT #
   ##########
   def start_link(args \\ []), do: GenServer.start_link(__MODULE__, args, name: __MODULE__)
-  def status(pid) when is_pid(pid), do: GenServer.call(__MODULE__, {:status, pid})
+  def status(), do: GenServer.call(__MODULE__, :status)
 
   def add_task(func) when is_function(func), do: GenServer.cast(__MODULE__, {:add, func})
 
@@ -51,6 +51,8 @@ defmodule TaskHandler do
 
   def handle_cast({:add, fun}, %{tasks: tasks} = s),
     do: {:noreply, %{s | tasks: [spawn(fun) | tasks]}}
+
+  def handle_call(:status, _from, s), do: {:reply, s, s}
 
   def handle_info(:check_tasks, %{tasks: t, queue: []} = s) do
     {alive, _fin} = Enum.split_with(t, fn pid -> Process.alive?(pid) end)
