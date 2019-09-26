@@ -1,0 +1,38 @@
+\section{Unlinked processes}
+
+\frame{\tableofcontents[currentsection]}
+
+\begin{frame}
+    \frametitle{2 processes $($\&spawn/1$)$}
+    \begin{center}
+        \begin{tikzpicture}[roundnode/.style={circle, draw=green!60, fill=green!5, very thick, minimum size=7mm}]
+            %Nodes
+            \node[roundnode]   (processA)                {A};
+            \node[roundnode]   (processB)  [right=of processA]    {B};
+        \end{tikzpicture}
+    \end{center}
+    2 unlinked processes spawned
+\end{frame}
+
+\begin{frame}
+    \frametitle{2 processes $($\&spawn/1$)$}
+    \begin{center}
+        \begin{tikzpicture}[roundnode/.style={circle, draw=green!60, fill=green!5, very thick, minimum size=7mm}]
+            \node[roundnode]   (processA)                {A};
+            \node[cross out, draw]   (processB)  [right=of processA]    {B};
+        \end{tikzpicture}
+    \end{center}
+
+    Process B dies
+\end{frame}
+
+\begin{frame}
+    \frametitle{2 processes $($\&spawn/1$)$}
+    \begin{center}
+        \begin{tikzpicture}[roundnode/.style={circle, draw=green!60, fill=green!5, very thick, minimum size=7mm}]
+            \node[roundnode]   (processA)                {A};
+        \end{tikzpicture}
+    \end{center}
+
+    Process A keeps going
+\end{frame}

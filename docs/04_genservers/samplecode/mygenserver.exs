@@ -36,18 +36,24 @@ defmodule TaskHandler do
   ##########
   # CLIENT #
   ##########
-  def start_link(args \\ []), do: GenServer.start_link(__MODULE__, args, name: __MODULE__)
-  def status(), do: GenServer.call(__MODULE__, :status)
+  def start_link(args \\ []),
+    do: GenServer.start_link(__MODULE__, args, name: __MODULE__)
 
-  def add_task(func) when is_function(func), do: GenServer.cast(__MODULE__, {:add, func})
+  def status(),
+    do: GenServer.call(__MODULE__, :status)
+
+  def add_task(func) when is_function(func),
+    do: GenServer.cast(__MODULE__, {:add, func})
 
   ##########
   # SERVER #
   ##########
-  def init(args), do: {:ok, struct(TaskHandler, args), {:continue, :start_recurring_tasks}}
+  def init(args),
+    do: {:ok, struct(TaskHandler, args), {:continue, :start_recurring_tasks}}
 
-  def handle_cast({:add, fun}, %{tasks: t, queue: q, task_limit: tl} = s) when length(t) >= tl,
-    do: {:noreply, %{s | queue: [fun | q]}}
+  def handle_cast({:add, fun}, %{tasks: t, queue: q, task_limit: tl} = s)
+      when length(t) >= tl,
+      do: {:noreply, %{s | queue: [fun | q]}}
 
   def handle_cast({:add, fun}, %{tasks: tasks} = s),
     do: {:noreply, %{s | tasks: [spawn(fun) | tasks]}}
@@ -65,8 +71,11 @@ defmodule TaskHandler do
 
     Enum.split_with(t, fn pid -> Process.alive?(pid) end)
     |> case do
-      {_, []} -> {:noreply, s}
-      {alive, _fin} -> {:noreply, %{s | tasks: [spawn(first_fun) | alive], queue: rest}}
+      {_, []} ->
+        {:noreply, s}
+
+      {alive, _fin} ->
+        {:noreply, %{s | tasks: [spawn(first_fun) | alive], queue: rest}}
     end
   end
 

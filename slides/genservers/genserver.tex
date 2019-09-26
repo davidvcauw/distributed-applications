@@ -3,22 +3,24 @@
 \usepackage{tikz}
 \usepackage{calc}
 \usepackage{ucll-code}
+\usepackage{graphicx}
 
-
+\graphicspath{ {./images/} }
 \usetikzlibrary{calc,shadows,tikzmark}
 \usetikzlibrary{positioning}
 \usetikzlibrary{shapes,snakes} 
 
 \coursename{Distributed Applications}
-\title{links and monitors}
+\title{GenServer}
 
 
 \begin{document}
 
 \maketitle
 
-\input{aux-unlinked-p.tex}
-\input{aux-linked-p.tex}
-\input{aux-monitors.tex}
+\input{aux-intro.tex}
+\input{aux-comparison.tex}
+\input{aux-GS_flow.tex}
+\input{aux-usage.tex}
 
 \end{document}

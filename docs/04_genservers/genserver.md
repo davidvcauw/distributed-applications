@@ -11,7 +11,7 @@ If you want to know the difference, I couldn't explain it more obvious than this
 If you read the above post, skip to the next chapter. If you want a quick summary:
  * GenServer, as the name implies, is a generic server used most of the times for a variety of use cases.
  * Agent is basically just a simplified GenServer.
- * Task is easy to use for async jobs which give an output. Their API such as Task.await or Task.yield is very useful. (Not to mention that its less work for the garbage collector)
+ * Task is easy to use for async jobs which give an output. Their API such as Task.await or Task.yield is very useful. 
 
 ## Overview GenServer behaviour
 Look at the slides for an overview of the GenServer API.
@@ -20,7 +20,7 @@ Look at the slides for an overview of the GenServer API.
  * `[SERVER]` init function is called. At this point the server process is alive, but this phase shouldn't take too long. If a lot of start up work has to be done after initializing the process, consider `handle_continue`. _Note that the argument from GenServer.start or GenServer.start_link is passed to the init function. This is most of the time a named list._
  * `[SERVER]` After the init function is complete, a recursive loop function with a receive block is called. This should be familiar. 
  * `[CLIENT | SERVER]` The client will most often call a function, such as `MyGenServer.Counter.addone/1 or /0`(depends whether the process is name registered or not, more about that later), which will call the underlying `GenServer.cast` / `call`/ or the basic `send`.
-    * Beware! cast is asynchronous, call is synchronous, send is how you define it. 
+    * Beware! cast is asynchronous, call is synchronous. 
     * You can specify your behaviour with `handle_cast`, `handle_call` and `handle_info`.
  * `[SERVER]` The `terminate` callback is called when `GenServer.terminate` is called.
 
@@ -262,13 +262,15 @@ In this case, we'll add a function to be executed in our task list or execute it
 Once again multi-clause functions allow us to write specific code for each function. The first one has a guard that checks whether we can still execute new tasks. If that's not possible, we just add it to the queue. If it is possible, we just start the process and add it to our remaining tasks.
 
 ### `handle_call` to retrieve information
-The last important callback is `handle_call`. Keep in mind that this is synchronous and will block your GenServer! In our case, we'll just use it to dump the current state of the GenServer.
+The last important callback is `handle_call`. Keep in mind that this is synchronous and will block your client process until you receive a response! In our case, we'll just use it to dump the current state of the GenServer.
 
 ```elixir
   def handle_call(:status, _from, s), do: {:reply, s, s}
 ```
 
 The `handle_call` function takes 3 parameters. The first one is the message, second is a tuple of the caller PID with a unique reference and the third one is the state. After that, we have a range of choices of what to return. These choices are described at the following link https://hexdocs.pm/elixir/GenServer.html#c:handle_call/3 , but we're just replying the state (2nd element of the tuple) and the 3rd element of the tuple is the new state.
+
+_Note: you can return a `:noreply` tuple, but it is still necessary to return a reply! Check the docs for these specific use cases!_
 
 ## Overview
 
@@ -349,3 +351,8 @@ TaskHandler.add_task(send_after_3_secs)
 ```
 
 _Note that this code does not have any guarantees in which order the code is executed._
+
+## Extra
+Why didn't we use the task module? That's because you most likely want a response from your task, even if it is just `:ok`. This would mean that we have to use `Task.yield` or `Task.await`. Using these functions links the task to our current GenServer, which wouldn't be a wise choice. What if a user tries a simple function with `raise "oops"`? Our whole GenServer would crash with the complete queue. We can counteract this with a supervisor, but that's a little bit too early in this course.
+
+_Note: There is a `Task.Supervisor.async_nolink/3`, but as the name implies it requires a Supervisor._
