@@ -1,0 +1,60 @@
+\section{Linked processes}
+
+\frame{\tableofcontents[currentsection]}
+
+\begin{frame}
+    \frametitle{2 processes (\texttt{\&spawn\_link/1})}
+    \begin{center}
+        \begin{tikzpicture}[roundnode/.style={circle, draw=green!60, fill=green!5, very thick, minimum size=7mm}]
+            %Nodes
+            \node[roundnode]   (processA)                {A};
+            \node[roundnode]   (processB)  [right=of processA]    {B};
+            \draw[->] (processA.east) -- (processB.west);
+        \end{tikzpicture}
+    \end{center}
+    Process A initiates link 
+    \vfill
+    (As process A:) \texttt{ProcessB |> Process.whereis |> Process.link}
+\end{frame}
+
+\begin{frame}
+    \frametitle{2 processes (\&spawn\_link/1)}
+    \begin{center}
+        \begin{tikzpicture}[roundnode/.style={circle, draw=green!60, fill=green!5, very thick, minimum size=7mm}]
+            %Nodes
+            \node[roundnode]   (processA)                {A};
+            \node[roundnode]   (processB)  [right=of processA]    {B};
+            \draw[<->] (processA.east) -- (processB.west);
+        \end{tikzpicture}
+    \end{center}
+    Processes are linked \textbf{bidirectionally}
+\end{frame}
+
+\begin{frame}
+    \frametitle{2 processes (\&spawn\_link/1)}
+    \begin{center}
+        \begin{tikzpicture}[roundnode/.style={circle, draw=green!60, fill=green!5, very thick, minimum size=7mm}]
+            \node[roundnode]   (processA)                {A};
+            \node[cross out, draw]   (processB)  [right=of processA]    {B};
+            \draw[<->] (processA.east) -- (processB.west);
+        \end{tikzpicture}
+    \end{center}
+
+    Process B dies
+\end{frame}
+
+\begin{frame}
+    \frametitle{2 processes (\&spawn\_link/1)}
+    \begin{center}
+        \begin{tikzpicture}[roundnode/.style={circle, draw=green!60, fill=green!5, very thick, minimum size=7mm}]
+            \node[cross out, draw]   (processA)                {A};
+            \node[cross out, draw]   (processB)  [right=of processA]    {B};
+            \draw[<->] (processA.east) -- (processB.west);
+        \end{tikzpicture}
+    \end{center}
+
+    Process A receives a "death message", and if it is not a system process, no custom behaviour can be implemented when this message is received.
+    \vfill
+    \textit{Note: Even if it is a system process, the end result should also be death. 
+    This is often used when you want to do certain actions, such as cleaning up your process.}
+\end{frame}
