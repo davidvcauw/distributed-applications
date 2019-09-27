@@ -5,7 +5,7 @@
 \begin{frame}
     \frametitle{2 processes (\texttt{\&spawn/1})}
     \begin{center}
-        \begin{tikzpicture}[process/.style={circle,draw=green!60,fill=green!5,very thick, minimum size=7mm}]
+        \begin{tikzpicture}
             \coordinate (process A position) at (0,0);
             \coordinate (process B position) at ($ (process A position) + (2,0) $);
             \path[use as bounding box] ($ (process A position) + (-1,-1) $) rectangle ($ (process B position) + (1,1) $);
@@ -15,7 +15,7 @@
                 \node[process] at (process B position) {B};
             }
             \only<2>{
-                \node[cross out,draw] at (process B position) {B};
+                \node[dead process] at (process B position) {B};
             }
         \end{tikzpicture}
     \end{center}

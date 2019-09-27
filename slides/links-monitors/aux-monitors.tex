@@ -3,57 +3,55 @@
 \frame{\tableofcontents[currentsection]}
 
 \begin{frame}
-    \frametitle{2 processes (\&spawn/1)}
+    \frametitle{2 processes (\texttt{\&spawn/1})}
     \begin{center}
-        \begin{tikzpicture}[roundnode/.style={circle, draw=green!60, fill=green!5, very thick, minimum size=7mm}]
-            \node[roundnode]   (processA)                {A};
-            \node[roundnode]   (processB)  [right=of processA]    {B};
-            \draw[->] (processA.east) -- (processB.west);
+        \begin{tikzpicture}
+            \coordinate (process A position) at (0,0);
+            \coordinate (process B position) at (2,0);
+            \coordinate (process C position) at (2,-2);
+
+            \only<1>{
+                \node[process] (process A) at (process A position) {A};
+                \node[process] (process B) at (process B position) {B};
+                \draw[-latex] (process A) -- (process B);
+            }
+            \only<2>{
+                \node[process] (process A) at (process A position) {A};
+                \node[process] (process B) at (process B position) {B};
+                \draw[latex-] (process A) -- (process B);
+            }
+            \only<3>{
+                \node[process] (process A) at (process A position) {A};
+                \node[dead process] (process B) at (process B position) {B};
+                \draw[latex-] (process A) -- (process B);
+            }
+            \only<4>{
+                \node[process] (process A) at (process A position) {A};
+                \node[dead process] (process B) at (process B position) {B};
+                \node[process] (process C) at (process C position) {C};
+                \draw[latex-] (process A) -- (process B);
+                \draw[-latex] (process A) -- (process C);
+            }
         \end{tikzpicture}
     \end{center}
-    Process A initiates monitoring
-    \vfill
-    ProcessB $|>$ Process.whereis $|>$ Process.monitor
-\end{frame}
+    \vskip10mm
+    \begin{overprint}
+        \onslide<1>
+        \code[language=elixir,font=\small]{monitor.exs}
 
-\begin{frame}
-    \frametitle{2 processes (\&spawn/1)}
-    \begin{center}
-        \begin{tikzpicture}[roundnode/.style={circle, draw=green!60, fill=green!5, very thick, minimum size=7mm}]
-            \node[roundnode]   (processA)                {A};
-            \node[roundnode]   (processB)  [right=of processA]    {B};
-            \draw[<-] (processA.east) -- (processB.west);
-        \end{tikzpicture}
-    \end{center}
-    Processes are linked \textbf{unidirectionally}
-\end{frame}
+        \onslide<2>
+        \begin{center}
+            Processes are linked \textbf{unidirectionally}
+        \end{center}
 
-\begin{frame}
-    \frametitle{2 processes (\&spawn/1)}
-    \begin{center}
-        \begin{tikzpicture}[roundnode/.style={circle, draw=green!60, fill=green!5, very thick, minimum size=7mm}]
-            \node[roundnode]   (processA)                {A};
-            \node[cross out, draw]   (processB)  [right=of processA]    {B};
-            \draw[<-] (processA.east) -- (processB.west);
-        \end{tikzpicture}
-    \end{center}
+        \onslide<3>
+        \begin{center}
+            Process B dies
+            \vskip2mm
+            This causes a message to be sent to A
+        \end{center}
 
-    Process B dies
-    \vfill
-    When something happens to B, A will receive a message.
-\end{frame}
-
-\begin{frame}
-    \frametitle{2 processes (\&spawn/1)}
-    \begin{center}
-        \begin{tikzpicture}[roundnode/.style={circle, draw=green!60, fill=green!5, very thick, minimum size=7mm}]
-            \node[roundnode]   (processA)                {A};
-            \node[cross out, draw]   (processB)  [right=of processA]    {B};
-            \node[roundnode]   (processC)  [below=of processB]    {C};
-            \draw[<-] (processA.east) -- (processB.west);
-            \draw[->] (processA.south) -- (processC.west);
-        \end{tikzpicture}
-    \end{center}
-    \vfill
-    Process A receives a "death message". A sample usage of a monitoring process would be starting up another process.
+        \onslide<4>
+        Process A receives a "death message". A sample usage of a monitoring process would be starting up another process.
+    \end{overprint}
 \end{frame}
