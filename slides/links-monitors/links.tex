@@ -20,38 +20,32 @@
 \section{Unlinked processes}
 
 \begin{frame}
-    \frametitle{2 processes $($\&spawn/1$)$}
+    \frametitle{2 processes (\&spawn/1)}
     \begin{center}
-        \begin{tikzpicture}[roundnode/.style={circle, draw=green!60, fill=green!5, very thick, minimum size=7mm}]
-            %Nodes
-            \node[roundnode]   (processA)                {A};
-            \node[roundnode]   (processB)  [right=of processA]    {B};
+        \begin{tikzpicture}[process/.style={circle,draw=green!60,fill=green!5,very thick, minimum size=7mm}]
+            \coordinate (process A position) at (0,0);
+            \coordinate (process B position) at ($ (process A position) + (2,0) $);
+            \path[use as bounding box] ($ (process A position) + (-1,-1) $) rectangle ($ (process B position) + (1,1) $);
+
+            \node[process] at (process A position) {A};
+            \only<1>{
+                \node[process] at (process B position) {B};
+            }
+            \only<2>{
+                \node[cross out,draw] at (process B position) {B};
+            }
         \end{tikzpicture}
     \end{center}
-    2 unlinked processes spawned
-\end{frame}
+    \begin{overprint}
+        \onslide<1>
+        Two unlinked processes spawned
 
-\begin{frame}
-    \frametitle{2 processes $($\&spawn/1$)$}
-    \begin{center}
-        \begin{tikzpicture}[roundnode/.style={circle, draw=green!60, fill=green!5, very thick, minimum size=7mm}]
-            \node[roundnode]   (processA)                {A};
-            \node[cross out, draw]   (processB)  [right=of processA]    {B};
-        \end{tikzpicture}
-    \end{center}
+        \onslide<2>
+        Process B dies
 
-    Process B dies
-\end{frame}
-
-\begin{frame}
-    \frametitle{2 processes $($\&spawn/1$)$}
-    \begin{center}
-        \begin{tikzpicture}[roundnode/.style={circle, draw=green!60, fill=green!5, very thick, minimum size=7mm}]
-            \node[roundnode]   (processA)                {A};
-        \end{tikzpicture}
-    \end{center}
-
-    Process A keeps going
+        \onslide<3>
+        Process A keeps going
+    \end{overprint}
 \end{frame}
 
 
@@ -72,7 +66,7 @@
 \section{Linked processes}
 
 \begin{frame}
-    \frametitle{2 processes $($\&spawn\_link/1$)$}
+    \frametitle{2 processes (\&spawn\_link/1)}
     \begin{center}
         \begin{tikzpicture}[roundnode/.style={circle, draw=green!60, fill=green!5, very thick, minimum size=7mm}]
             %Nodes
@@ -83,11 +77,11 @@
     \end{center}
     Process A initiates link 
     \vfill
-    $($As process A:$)$ ProcessB $|>$ Process.whereis $|>$ Process.link
+    (As process A:) \texttt{ProcessB |> Process.whereis |> Process.link}
 \end{frame}
 
 \begin{frame}
-    \frametitle{2 processes $($\&spawn\_link/1$)$}
+    \frametitle{2 processes (\&spawn\_link/1)}
     \begin{center}
         \begin{tikzpicture}[roundnode/.style={circle, draw=green!60, fill=green!5, very thick, minimum size=7mm}]
             %Nodes
@@ -100,7 +94,7 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{2 processes $($\&spawn\_link/1$)$}
+    \frametitle{2 processes (\&spawn\_link/1)}
     \begin{center}
         \begin{tikzpicture}[roundnode/.style={circle, draw=green!60, fill=green!5, very thick, minimum size=7mm}]
             \node[roundnode]   (processA)                {A};
@@ -113,7 +107,7 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{2 processes $($\&spawn\_link/1$)$}
+    \frametitle{2 processes (\&spawn\_link/1)}
     \begin{center}
         \begin{tikzpicture}[roundnode/.style={circle, draw=green!60, fill=green!5, very thick, minimum size=7mm}]
             \node[cross out, draw]   (processA)                {A};
@@ -144,7 +138,7 @@
 \section{Monitors}
 
 \begin{frame}
-    \frametitle{2 processes $($\&spawn/1$)$}
+    \frametitle{2 processes (\&spawn/1)}
     \begin{center}
         \begin{tikzpicture}[roundnode/.style={circle, draw=green!60, fill=green!5, very thick, minimum size=7mm}]
             \node[roundnode]   (processA)                {A};
@@ -158,7 +152,7 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{2 processes $($\&spawn/1$)$}
+    \frametitle{2 processes (\&spawn/1)}
     \begin{center}
         \begin{tikzpicture}[roundnode/.style={circle, draw=green!60, fill=green!5, very thick, minimum size=7mm}]
             \node[roundnode]   (processA)                {A};
@@ -170,7 +164,7 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{2 processes $($\&spawn/1$)$}
+    \frametitle{2 processes (\&spawn/1)}
     \begin{center}
         \begin{tikzpicture}[roundnode/.style={circle, draw=green!60, fill=green!5, very thick, minimum size=7mm}]
             \node[roundnode]   (processA)                {A};
@@ -185,7 +179,7 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{2 processes $($\&spawn/1$)$}
+    \frametitle{2 processes (\&spawn/1)}
     \begin{center}
         \begin{tikzpicture}[roundnode/.style={circle, draw=green!60, fill=green!5, very thick, minimum size=7mm}]
             \node[roundnode]   (processA)                {A};
