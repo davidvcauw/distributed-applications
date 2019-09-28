@@ -9,7 +9,7 @@ the functions in question are very short.
 An alternative would be to define the four functions inline, as lambdas.
 A lambda is a function which you don't bother to give a name to.
 For this reason, they're also called *anonymous functions* (which is the term
-Elixir uses, so if you need to look up something online, use "anonymous functions".)
+Elixir uses, so if you need to look up something online, use "anonymous functions").
 For example, the code
 
 ```elixir
@@ -49,4 +49,4 @@ Concise is good, cryptic is bad.
 
 ## Task
 
-Solve the previous exercise (`Shop.discount`) again, but make use of lambdas instead of names functions.
+Solve the previous exercise (`Shop.discount`) again, but make use of lambdas instead of named functions.
