@@ -64,7 +64,7 @@ Let's take `sum` again as our working example.
 
 ## Task
 
-Define `reduce(xs, init, f)` where
+Define `Util.reduce(xs, init, f)` where
 
 * `xs` is a list of elements.
 * `init` is the initial value for `acc` with which you'll start combining values.
