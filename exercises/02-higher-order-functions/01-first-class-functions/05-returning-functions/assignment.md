@@ -15,7 +15,7 @@ end
 ```
 
 If you want to "pick up" `foo` as if it were a value, you need to use a special syntax in Elixir, namely
-`&Foo.foo/1`. To ampersand indicates "I am referring to a function here", the `/1` corresponds to the arity.
+`&Foo.foo/1`. The ampersand indicates "I am referring to a function here", the `/1` corresponds to the arity.
 As [explained previously](/docs/compiler-checks.md), Elixir allows overloading, i.e., multiple
 functions sharing the same name, as long as their arity differs.
 
@@ -87,4 +87,4 @@ For those not knowing how to start:
 * Define a private function `standard` that, given a price, simply returns it. This corresponds to no discount.
 * Define a private function `bronze` that, given a price, returns it reduced by 5%.
 * Do the same for `silver` and `gold`.
-* Lastly, define a public function `discount` that depending on its argument, returns `standard`, `bronze`, `silver` of `gold`.
+* Lastly, define a public function `discount` that depending on its argument, returns `standard`, `bronze`, `silver` or `gold`.
