@@ -27,7 +27,7 @@ a list of numbers
 1   2   3   4   5
 ```
 
-To take the sum of these numbers, we add `+` operators in between them values:
+To take the sum of these numbers, we add `+` operators in between the values:
 
 ```text
 1 + 2 + 3 + 4 + 5
@@ -60,7 +60,7 @@ Let's take `sum` again as our working example.
 * We combine the second element (`2`) with this latest value. This gives `acc + 2 = 3`. Again, this becomes `acc`'s new value.
 * Combining the third element gives `acc + 3 = 6`.
 * Combining the fourth element gives `acc + 4 = 10`.
-* Combining the third element gives `acc + 5 = 15`.
+* Combining the fifth element gives `acc + 5 = 15`.
 
 ## Task
 
