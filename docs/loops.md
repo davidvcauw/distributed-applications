@@ -269,7 +269,7 @@ function filter(xs, condition)
 ```
 
 Note that `condition` now takes a parameter: it is a function
-that receives a element of `xs` and returns `true` if it should be selected.
+that receives an element of `xs` and returns `true` if it should be selected.
 
 Let's try it out:
 
@@ -342,7 +342,7 @@ Examples of other "loop functions" from the [`Enum` module](https://hexdocs.pm/e
 * `reduce`: reduces all items to just one value according to a specified rule. Can be used to take sums, count elements, etc.
 * `find`: finds the first element satisfying a given condition.
 * `all?`: checks if all elements satisfy a given condition.
-* `any?`: checks if all elements satisfy a given condition.
+* `any?`: checks if any element satisfies a given condition.
 * `count`: counts the number of elements satisfying a given condition.
 
 ## Advantages

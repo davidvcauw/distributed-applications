@@ -60,7 +60,7 @@ iex(1)> quote do
 
 The details of this structure are not important, but you can
 discern a few familiar details in it: the `defmodule` appears as an atom,
-and so so `Foo`, `def` and `bar`. In fact, all essential parts
+and so do `Foo`, `def` and `bar`. In fact, all essential parts
 of the code are present in this structure.
 
 Admittedly, atoms are not really necessary to make this possible: Elixir

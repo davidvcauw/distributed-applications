@@ -39,7 +39,7 @@ defmodule Tests do
   check that: Math.simplify({:+, {:+, 1, 2}, {:+, 3, 4}}), is_equal_to: 1 + 2 + 3 + 4
   check that: Math.simplify({:+, {:+, 1, 2}, :x}), is_equal_to: {:+, 3, :x}
 
-  # x - 0 == 0
+  # x - 0 == x
   check that: Math.simplify({:-, :x, 0}), is_equal_to: :x
   check that: Math.simplify({:-, {:+, :x, :y}, 0}), is_equal_to: {:+, :x, :y}
 

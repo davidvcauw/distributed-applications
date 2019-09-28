@@ -72,7 +72,7 @@ piece of data belongs. In such cases, naming the different
 fields will become necessary. Maps provide this functionality;
 they will be discussed in a later series of exercises.
 
-In summary, whether you need tuples, lists of maps depends
+In summary, whether you need tuples, lists or maps depends
 on the context. As we progress, we'll try to make clear
 which one is more apt for the situation at hand.
 
