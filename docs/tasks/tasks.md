@@ -2,20 +2,24 @@
 layout: default
 ---
 # Tasks
+
 _We are using terminology normally used in the Erlang / Elixir context. When we talk about OS-related terminology, we will specifically mention this._
+
 ## Tasks vs processes
-Tasks are an abstraction to normal processes, meant to easily execute asynchronous compute-intensive operations and await for their response. 
+
+Tasks are an abstraction to normal processes, meant to easily execute asynchronous compute-intensive operations and await for their response.
 
 They normally require no communication, and also provide a useful API to do different operations.
 
 ## An asynchronous task with a reply
+
 There are different kind of tasks, but let us start with the most basic form. A task that gives a response.
 
 ### Context: factorials and triangular numbers
 
 Let us start with a very simple factorial module (with tail-call optimization).
 
-```elixir 
+```elixir
 defmodule Factorials do
     def calculate(n), do: calculate(n, 1)
     def calculate(1, acc), do: acc
@@ -25,9 +29,9 @@ end
 
 _We'll use a benchmark module which will be explained later on._
 
-Calculating the factorial of 50 000 will take a while, on my system it takes 1.7s. Image that we have to do something with this factorial, but also some other work. For example also the triangular number of the same N value times 10 000. (link: https://en.wikipedia.org/wiki/Triangular_number)
+Calculating the factorial of 50 000 will take a while, on my system it takes 1.7s. Image that we have to do something with this factorial, but also some other work. For example also the [triangular number](https://en.wikipedia.org/wiki/Triangular_number) of the same N value times 10 000.
 
-```elixir 
+```elixir
 defmodule Triangular do
     def number(n), do: number(n, 0)
     def number(0, acc), do: acc
@@ -38,9 +42,10 @@ end
 If we would do this synchronously then we'd spend 4.5-5s waiting, while only using one core to achieve this. This could easily be done asynchronously, considering both tasks have no need to interact / communicate with each other.
 
 ### `Task.async` and `Task.await`
+
 First let us start a tedious task:
 
-```elixir 
+```elixir
 iex> Task.async fn -> "returning HI" end
 %Task{
     owner: #PID<0.105.0>,
@@ -61,7 +66,7 @@ For this we'll use the erlang HTTP client. Take note that this is just for educa
 
 To be able to use this, we'll do a little bit of preparation. First enable the inets module, and compile the following module:
 
-```elixir 
+```elixir
 defmodule Benchmark do
     def measure(function) do
     function
@@ -72,15 +77,16 @@ defmodule Benchmark do
 end
 Application.ensure_all_started(:inets)
 ```
+
 Execute a simple request to see that you can access the website:
 
-```elixir 
+```elixir
 :httpc.request(:get, {'http://intranet.ucll.be', []}, [], []) end)
 ```
 
 Don't worry about the empty parameters, because other libraries are easier to understand. If you successfully see the response, let's send 200 requests after each other and see how long this takes. _I'm putting a timer.sleep in here so that the effect is amplified._
 
-```elixir 
+```elixir
 fn ->
     Enum.map(1..200, fn _ ->
         :timer.sleep(100)
@@ -91,7 +97,7 @@ end |> Benchmark.measure()
 
 This will take around 23 seconds on my system. We can wrap this in a task and send all the requests parallel, which we can collect later on.
 
-```elixir 
+```elixir
 fn ->
     tasks =
     Enum.map(1..200, fn _ ->

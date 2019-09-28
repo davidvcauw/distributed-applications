@@ -6,12 +6,15 @@ layout: default
 _For this chapter you will need to know the basics of processes, pids, messages, pattern matching and other elixir fundamentals._
 
 ## Introduction
-As you already have seen, you can easily spawn a process with :
+
+As you already have seen, you can easily spawn a process with:
+
 ```elixir
 iex> spawn fn -> IO.puts "hi" end
 ```
 
-As you know already, the shell itself is a process as well with a PID. You can see this with :
+As you know already, the shell itself is a process as well with a PID. You can see this with:
+
 ```elixir
 iex> inspect self
 ```
@@ -45,15 +48,15 @@ defmodule PingPong do
     def loop() do
         receive do
             {:ping, from} ->
-		        IO.puts("ping")
-		        Process.send_after(from, {:pong, self()}, 1_000)
+                IO.puts("ping")
+                Process.send_after(from, {:pong, self()}, 1_000)
 
             {:pong, from} ->
-		        IO.puts("pong")
-		        Process.send_after(from, {:ping, self()}, 1_000)
+                IO.puts("pong")
+                Process.send_after(from, {:ping, self()}, 1_000)
 
             {:link, to} ->
-		        Process.link(to)
+                Process.link(to)
         end
 
         loop()
@@ -96,23 +99,27 @@ Process.flag :trap_exit, true
 It returns the old value, so don't be surprised when you the value "false" . Now spawn a linked process with a raise, and you'll see when you call "flush" that the exit message is in your mailbox.
 
 {% raw %}
+
 ```elixir
 {:EXIT, #PID<0.119.0>,
 {%RuntimeError{message: "uh oh"},
 [{:erl_eval, :do_apply, 6, [file: 'erl_eval.erl', line: 678]}]}}
 ```
+
 {% endraw %}
 
 You can pattern match on this message, do something with it, restart the process, etc... Supervisors are based upon these messages and take corrective actions when they receive one.
 
 ## Monitors
+
 Similar to links, we can receive the same exit messages with monitors. The difference is that when process A is monitoring B, A doesn't crash when B does.
 
 ### Monitors are unidirectional
+
 As already mentioned, the calling process, or the monitoring process, does not crash when the monitored process does. Needless to say that this relation is unidirectional, while you can still take corrective actions based upon this message. _Actions can also be taken upon normal exits instead of crashes, as we'll illustrate in the next example._
 
 ```elixir
-iex>  p = spawn fn -> :timer.sleep(10_000) end
+iex> p = spawn fn -> :timer.sleep(10_000) end
 #PID<0.132.0>
 iex> Process.monitor p
 #Reference<0.1590173300.1898971143.218430>
