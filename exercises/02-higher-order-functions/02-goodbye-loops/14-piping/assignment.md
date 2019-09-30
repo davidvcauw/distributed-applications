@@ -66,8 +66,8 @@ the operations appear in order of execution: `filter` appears first, and it is a
 
 ## Task
 
-Write a function `Grades.best_students` that returns the names of the top three students.
-Write it as a single expression, relying op pipes to connect the successive operations
+Write a function `Grades.best_students(grades)` that returns the names of the top three students.
+Write it as a single expression, relying on pipes to connect the successive operations.
 
 Hint: these are the operations you need:
 
