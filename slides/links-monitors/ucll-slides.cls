@@ -17,7 +17,6 @@
 \RequirePackage{url}
 \RequirePackage{framed}
 \RequirePackage{hyperref}
-\RequirePackage{cleveref}
 \RequirePackage{bbding}
 \RequirePackage{wasysym}
 

@@ -38,7 +38,7 @@ The formula to find the next `y` in line is
 Make sure not to confuse the meaning of the variables:
 
 * `y` is the most recently computed value of `y`
-* `next_t` is the next `y` in line.
+* `next_y` is the next `y` in line.
 * `x` is the *original* value whose square root you're trying to determine.
 
 The very first `y`-value is simply `x` itself.
