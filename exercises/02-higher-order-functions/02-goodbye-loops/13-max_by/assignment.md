@@ -2,7 +2,7 @@
 
 ## Task
 
-Write a function `Grades.best_student(grades)` that the name of the student with the highest grade.
+Write a function `Grades.best_student(grades)` that returns the name of the student with the highest grade.
 `grades` is a list containing tuples with structure `{ id, name, grade }`.
 
 For example, say `grades` is equal to

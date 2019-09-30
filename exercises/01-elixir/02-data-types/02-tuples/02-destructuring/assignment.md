@@ -1,6 +1,6 @@
 # Assignment
 
-Given a tuple, you'll probably want access its elements.
+Given a tuple, you'll probably want to access its elements.
 Tuples are much like arrays, which to a C#/Java/C++ programmer means
 writing the following code:
 
@@ -114,7 +114,7 @@ The `_` means "I know there's something here, but I don't care what it is."
 
 ## Task
 
-Write a function `same_suit?(card1, card2)` that checks whether
+Write a function `Cards.same_suit?(card1, card2)` that checks whether
 the cards have the same suit. Do *not* rely on `==` or `!=`;
 instead, make solely use of pattern matching.
 (This is solely for educational purposes;
