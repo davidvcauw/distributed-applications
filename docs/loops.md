@@ -373,7 +373,7 @@ function foo(students)
             }
         }
 
-        if ( result !== null && result > count )
+        if ( result == null || result > count )
         {
             result = student;
         }
