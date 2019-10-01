@@ -214,7 +214,7 @@ defmodule SampleProject.Demo do
 end
 ```
 
-The biggest change is the submodule for code organization purposes. Here we define with a module attribute (`@necessary`) what the necessary arguments are. After verifying this, we use these arguments in our `child_spec/1` function for the id. The remaining arguments are passed to the start link function, where we register the name as specified in the argument list. This way we can easily add extra children in our supervisor:
+The biggest change is the nested module for code organization purposes. Here we define with a module attribute (`@necessary`) what the necessary arguments are. After verifying this, we use these arguments in our `child_spec/1` function for the id. The remaining arguments are passed to the start link function, where we register the name as specified in the argument list. This way we can easily add extra children in our supervisor:
 
 ```elixir
     children = [
